@@ -1,6 +1,6 @@
 {
-    "version": "0.2a",
-    "versionCode": "0002",
-    "zipUrl": "https://github.com/Xahlicem/pixel5-cc/archive/refs/heads/main.zip",
+    "version": "0.3a",
+    "versionCode": "0003",
+    "zipUrl": "https://github.com/Xahlicem/pixel5-cc/releases/download/latest/pixel5-cc.zip",
     "changelog": "https://raw.githubusercontent.com/Xahlicem/pixel5-cc/main/README.md"
 }
