@@ -1,0 +1,60 @@
+#!/system/bin/sh
+#CONSTANTS
+level_stp=60
+level_res=40
+#PATHS
+path_plug="/sys/class/power_supply/sm7250_bms/online"
+path_batt="/sys/class/power_supply/battery/capacity"
+path_stop="/sys/class/power_supply/sm7250_bms/charge_disable"
+path_amps="/sys/class/power_supply/sm7250_bms/constant_charge_current_max"
+#FUNCTIONS
+nfc() {
+  if [ $(dumpsys nfc | grep "mState=") == "mState=off" ]; then
+    echo 1
+  else
+    echo 0
+  fi
+}
+
+plug() {
+  cat $path_plug
+}
+
+batt() {
+  cat $path_batt
+}
+
+plug_wait() {
+  if [ $(plug) == 0 ] || [ $(nfc) == 1 ]; then
+    return
+  fi
+  sleep 5
+}
+
+charge() {
+  local stop=$1
+
+  echo $stop > $path_stop
+  if [[ $stop == 1 ]]; then
+    while [[ $(batt) -gt $level_res ]]; do
+      plug_wait
+    done
+    return
+  fi
+
+  echo 500000 > $path_amps
+  while [[ $(batt) -lt $level_stp ]]; do
+    plug_wait
+  done
+}
+#MAIN
+while true; do
+  if [ $(plug) == 1 ] && [ $(nfc) == 0 ]; then
+    if [[ $(batt) -lt $level_res ]]; then
+      charge 0
+    else
+      charge 1
+    fi
+  fi
+  sleep 5
+done
