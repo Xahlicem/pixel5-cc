@@ -4,5 +4,5 @@ version=0.2a
 versionCode=0002
 author=Xahlicem
 description=Charge Controller made specifically for the Pixel 5
-updateJson=https://raw.githubusercontent.com/Xahlicem/pixel5-cc/master/update.json
+updateJson=https://raw.githubusercontent.com/Xahlicem/pixel5-cc/main/update.json
 template=1500
