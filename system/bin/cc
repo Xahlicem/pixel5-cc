@@ -29,6 +29,7 @@ plug_wait() {
     echo "NFC"
     echo 3900000 > $path_amps
     echo 0 > $path_stop
+    "cmd notification post -S bigtext -t 'Pixel5-CC' 'System' 'Phone will charge normally until NFC is disabled.'"
     return
   fi
   if [ $(plug) == 0 ]; then

@@ -5,8 +5,10 @@ if [ $3 == "disable" ]; then
     killall cc
     echo 3900000 > /sys/class/power_supply/sm7250_bms/constant_charge_current_max
     echo 0 > /sys/class/power_supply/sm7250_bms/charge_disable
+    su -lp 2000 -c "cmd notification post -S bigtext -t 'Pixel5-CC' 'System' 'Charge Controller disabled!'"
   elif [ $1 == "d" ]; then
     cc
+    su -lp 2000 -c "cmd notification post -S bigtext -t 'Pixel5-CC' 'System' 'Charge Controller enabled!'"
   fi
 fi
 
