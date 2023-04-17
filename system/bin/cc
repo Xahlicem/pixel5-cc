@@ -10,9 +10,9 @@ path_amps="/sys/class/power_supply/sm7250_bms/constant_charge_current_max"
 #FUNCTIONS
 nfc() {
   if [ $(dumpsys nfc | grep "mState=") == "mState=off" ]; then
-    echo 1
-  else
     echo 0
+  else
+    echo 1
   fi
 }
 
@@ -25,7 +25,13 @@ batt() {
 }
 
 plug_wait() {
-  if [ $(plug) == 0 ] || [ $(nfc) == 1 ]; then
+  if [ $(nfc) == 1 ]; then
+    echo "NFC"
+    echo 3900000 > $path_amps
+    echo 0 > $path_stop
+    return
+  fi
+  if [ $(plug) == 0 ]; then
     return
   fi
   sleep 5
@@ -36,12 +42,14 @@ charge() {
 
   echo $stop > $path_stop
   if [[ $stop == 1 ]]; then
+    echo "Stop"
     while [[ $(batt) -gt $level_res ]]; do
       plug_wait
     done
     return
   fi
 
+  echo "charge"
   echo 500000 > $path_amps
   while [[ $(batt) -lt $level_stp ]]; do
     plug_wait
