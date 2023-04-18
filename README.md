@@ -1,5 +1,11 @@
 # README
 
+## 0.6b
+- Completly rewrote code.
+- No longer runs from system/bin.
+- NFC toggle works now!
+- Makefile for easy zipping.
+
 ## 0.5a
 - Added notifications.
 

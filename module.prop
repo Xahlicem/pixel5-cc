@@ -1,7 +1,7 @@
 id=pixel5-cc
 name=Pixel5 Charge Controller
-version=0.5a
-versionCode=0005
+version=0.6b
+versionCode=0006
 author=Xahlicem
 description=Charge Controller made specifically for the Pixel 5
 updateJson=https://raw.githubusercontent.com/Xahlicem/pixel5-cc/main/update.json

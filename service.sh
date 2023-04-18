@@ -2,5 +2,5 @@
 
 MODPATH=${0%/*}
 
-/system/bin/cc &
+$MODPATH/tools/cc.sh &
 inotifyd $MODPATH/tools/daemon.sh $MODPATH/
