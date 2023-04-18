@@ -44,7 +44,7 @@ charge() {
   echo $stop > $path_stop
   if [[ $stop == 1 ]]; then
     echo "Stop"
-    while [[ $(batt) -gt $level_res ]]; do
+    while [[ $(batt) -gt $level_res ]] && [ $(nfc) == 0 ]; do
       plug_wait
     done
     return
