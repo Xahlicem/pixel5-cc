@@ -1,5 +1,8 @@
 # README
 
+## ToDo
+- customize.sh
+
 ## 0.6b
 - Completly rewrote code.
 - No longer runs from system/bin.
